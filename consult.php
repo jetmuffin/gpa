@@ -1,84 +1,215 @@
 <?php
-/**
- * ajax业务处理中的接口转发层，解决ajax跨域访问的问题
- *   工作原理：问请求通过本程序做中转，在本地服务器层完成与远程服务接口的交互
- *   备注：使用时 URL_ROOT 这个参数需要根据你的目标接口地址进行修改，本转发层之能用于单接口的Web Service接口服务
- *        程序支持POST数据与GET数量的同时转发;
- * @version 1.0.0.2
- * @author JerryLi lijian@dzs.mobi
- * @copyright b.dzs.mobi 2012-11-16
- * */
-class interface_relay
+class subject
 {
-	/**接口根地址(此处是需要修改的地方)*/
-	const URL_ROOT = 'http://jwxt.hhu.edu.cn:7778/pls/wwwbks/bks_login2.login';
-	/**字符集*/
-	const CHARSET = 'UTF-8';
-	/**stuid*/
-	private $stuid = '';
-	/**pwd*/
-	private $pwd = '';
+	 public $title;
+	 public $type;
+	 public $credit;
+	 public $test;
+	 public $id;
+	 public $score;
+	 public $search_url;
+	 public $rank;
+	 public $totnum;
+}
+class student
+{
+	private $name;
+	private $college;
+	private $major;
+	private $id;
+	private $credit;
+	private $report = Array();
 
 	function __construct()
 	{
-		$this->getData();
-		if($this->stuid != '' || $this->pwd != '')
-		{	//存在输入数据
-			
-			$sUrl = self::URL_ROOT .'?stuid='. $this->stuid . '&pwd=' . $this->pwd;
-
-			header('Content-Type: text/html; charset='. self::CHARSET);
-			$this->getContent($sUrl);
-		}
-		else
-		{
-			header('Content-Type: text/html; charset='. self::CHARSET);
-			$this->getContent(self::URL_ROOT);
-		}
-		var_dump($this->stuid);
-		var_dump($this->pwd);
+		header("Content-type: text/html; charset=utf-8"); 
+		mb_internal_encoding("UTF-8");
+		$this->getData();	
+		$this->calCredit();
+		var_dump($this);
 	}
 
 	function __destruct()
 	{
-		unset($pwd, $stuid);
+		unset($name, $college,$major,$id);
 	}
 
-	/**
-	 * 获取数据
-	 * @return bool
-	 * */
 	private function getData()
 	{
-		$this->stuid =  $_POST['stuid'];
-		$this->pwd =  $_POST['pwd'];
-	}
+		$cookie_file = tempnam('./temp','cookie');
+		$login_url  = 'http://jwxt.hhu.edu.cn:7778/pls/wwwbks/bks_login2.login';
+		$post_fields = 'stuid='.$_POST['stuid'].'&pwd='.$_POST['pwd'];
 
-	/**
-	 * 读取远程接口返回的内容
-	 * @return string
-	 * */
-	private function getContent($sGetUrl)
-	{
-/**/	var_dump($sGetUrl);
-		$ch = curl_init($sGetUrl);
-		var_dump($ch);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true) ; // 获取数据返回  
-
-		$ch2 = curl_init();
-		curl_setopt($ch2, CURLOPT_URL, 'http://jwxt.hhu.edu.cn:7778/pls/wwwbks/bks_login2.loginmessage');
-		curl_setopt($ch2, CURLOPT_HEADER, false);
-		curl_setopt($ch2, CURLOPT_RETURNTRANSFER, 1);
-		$return = curl_exec($ch2);
-		echo $return;
-		$sData = curl_exec($ch);
+		$ch = curl_init($login_url);
+		curl_setopt($ch, CURLOPT_HEADER, 0);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($ch, CURLOPT_POST, 1);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $post_fields);
+		curl_setopt($ch, CURLOPT_COOKIEJAR, $cookie_file);
+		curl_exec($ch);
 		curl_close($ch);
-		unset($ch);
-		echo $sData.'123';
-		//return $sData;
+
+		//连接信息资源
+		$info_url='http://jwxt.hhu.edu.cn:7778/pls/wwwbks/bks_login2.loginmessage';
+		$ch = curl_init($info_url);
+		curl_setopt($ch, CURLOPT_HEADER, 0);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($ch, CURLOPT_COOKIEFILE, $cookie_file);
+		$info_contents = curl_exec($ch);
+		if(strlen($info_contents)<500) 
+		{
+			echo "账号或密码错误!";
+			return;
+		}
+		$info_contents = mb_convert_encoding($info_contents, "utf-8", "gb2312");
+		$this->getInfo($info_contents);
+
+		//连接成绩资源
+		$score_url='http://jwxt.hhu.edu.cn:7778/pls/wwwbks/bkscjcx.curscopre';
+		$ch = curl_init($score_url);
+		curl_setopt($ch, CURLOPT_HEADER, 0);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($ch, CURLOPT_COOKIEFILE, $cookie_file);
+		$score_contents = curl_exec($ch);
+		$score_contents = mb_convert_encoding($score_contents, "utf-8", "gb2312");
+		$this->getScore($score_contents);
+ 		curl_close($ch);
+
+ 		$rank_url = $this->getRankUrl();
+ 		//连接排名资源
+		$ch = curl_init($rank_url);
+		curl_setopt($ch, CURLOPT_HEADER, 0);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($ch, CURLOPT_COOKIEFILE, $cookie_file);
+		$rank_contents = curl_exec($ch);
+		$rank_contents = mb_convert_encoding($rank_contents, "utf-8", "gb2312");
+		//echo $rank_contents;
+		$this->getRank($rank_contents);
+ 		curl_close($ch);
 	}
+
+	private function getInfo($info_contents)
+	{
+		$info_contents = preg_replace('/\r|\n/', '', $info_contents);
+		preg_match('/<h4><font color=\"#9900FF\">(.*?)<\/font><\/h4>/',$info_contents,$info_str);
+		$info = explode(' ',$info_str[1]);
+		//获取学院
+		$this->college = $info[0];
+		//获取专业
+		$this->major = $info[1];
+		preg_match('/(.*?)\(/', $info[2],$name);
+		//获取姓名
+		$this->name = $name[1];
+		preg_match('/\((.*)\)/',$info[2],$id);
+		//获取学号
+		$this->id = $id[1];
+	}
+
+	//获取查询排名地址
+	private function getRankUrl()
+	{
+		$url='http://jwxt.hhu.edu.cn:7778/pls/wwwbks/bkscjcx.cursco?';
+		foreach ($this->report as $k => $v) {
+			if($v->search_url)
+			{
+				if($k!=0)
+				{
+					$url = $url.'&';
+				}
+				$url = $url.'p_pm=';
+				$url = $url.$v->search_url;		
+			}
+		}
+		return $url;
+	}
+
+	//获取分数
+	private function getScore($score_contents)
+	{
+		$tmp = "/<table width=\"100%\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" bgcolor=\"#F2EDF8\">[\s\S]*<\/table>/";
+		preg_match($tmp, $score_contents,$table);
+		$table = preg_replace('/\r|\n/', '', $table);
+		$tmp = '/<tr>(.*?)<\/tr>/si';
+		preg_match_all($tmp, $table[0],$tr);
+		$tmp = '/<p align="center">(.*?)<\/p>/si';
+		//遍历表格获取成绩单
+		foreach ($tr[1] as $k=>$v)
+		{
+			$subject = new subject();
+			preg_match_all($tmp, $v,$td_temp);
+			$td = $td_temp[1];
+			$url = substr($td[0], 42,-2);
+			$subject->search_url=urlencode(mb_convert_encoding($url,'gb2312','utf-8' ));
+			$subject->title = $td[2];
+			$subject->id = $td[1];
+			$subject->credit = $td[4];
+			$subject->score = $td[10];
+			$subject->test = $td[13];
+			$subject->type = $td[11];
+			array_push($this->report, $subject);
+		}
+	}
+
+	private function getRank($rank_contents)
+	{
+		$tmp = "/<table width=\"100%\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" bgcolor=\"#F2EDF8\">[\s\S]*<\/table>/";
+		preg_match($tmp, $rank_contents,$table);
+		$tmp = '/<tr>(.*?)<\/tr>/si';
+		preg_match_all($tmp, $table[0],$tr);
+		//var_dump($tr);
+		$tmp = '/<p align="center">(.*?)<\/p>/si';
+		foreach ($tr[1] as $k=>$v)
+		{
+
+			preg_match_all($tmp, $v,$td_temp);
+			$td = $td_temp[1];
+			//var_dump($td);
+			foreach ($this->report as $s => $k) {
+				if($k->id == $td[0])
+				{
+					$k->rank = $td[6];
+					$k->totnum = $td[3];
+				}
+			}
+		}
+	}
+	//绩点计算
+	private function calCredit()
+	{
+		$totScore = 0;
+		$totCredit = 0;
+		$credit = 0;
+		foreach ($this->report as $k=>$v)
+		{
+			if($v->type == '任选') {continue;}
+			else
+			{
+				if($v->score == '优秀') $credit = 5.0;
+				elseif ($v->score == '良好') $credit = 4.5;
+				elseif ($v->score == '合格') $credit = 3.0;
+				elseif($v->score<65) $credit = 2.0;
+				elseif($v->score<70) $credit = 2.5;
+				elseif($v->score<75) $credit = 3.0;
+				elseif($v->score<80) $credit = 3.5;
+				elseif($v->score<85) $credit = 4.0;
+				elseif($v->score<90) $credit = 4.5;
+				else $credit = 5.0;
+			}
+
+	//		echo $v->title." 绩点：".$credit." 学分:".$v->credit;
+	//		echo "<br/>";
+			$totScore +=  $credit * $v->credit;
+			$totCredit += $v->credit;
+		}
+		if($totCredit!=0)
+			$this->credit = $totScore/$totCredit;
+		else 
+			$this->credit = 0;
+	//	var_dump($this->credit);
+	}
+
 }
 
-$o = new interface_relay();
-unset($o);
+$stu = new student();
+unset($stu);
 ?>
