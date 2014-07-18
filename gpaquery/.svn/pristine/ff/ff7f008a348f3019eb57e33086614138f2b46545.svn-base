@@ -52,4 +52,13 @@
 			</div>
 	    </div>
     </div>
-<?php include 'footer.php'; ?>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/semantic.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#github').popup();
+		$('#contact').popup();
+	});
+</script>
+</body>
+</html>
