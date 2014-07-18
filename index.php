@@ -6,14 +6,38 @@
 <link rel="stylesheet" type="text/css" href="css/semantic.css">
 <link rel="stylesheet" type="text/css" href="css/style.css">
 <body>
-	<div class="ui fixed transparent inverted main menu">
+	<div class="navbar ">
+		<div class="navbar-inner">
+			<div class="container">
+				<a href="" class="brand">成绩查询代理系统</a>
+				<div href="" class="divider-vertical"></div>
+				<a href="" class="school">河海大学</a>
+				<div class="info">
+					<ul>
+						<li>
+							<a id="github" class="popup icon github item" title="查看本站在Github的项目信息"  data-content="查看本站在Github的项目信息" href="https://github.com/JetMuffin/gpa">
+	                			<i class="icon github"></i>
+		            		</a>
+		            	</li>
+						<li>|</li>
+						<li>
+							 <a class="title item">
+				                Design By JetMuffin
+				            </a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+<!-- 	<div class="ui fixed transparent inverted main menu">
         <div class="container header-top">
             <a class="launch item"><i class="icon search"></i> 成绩查询代理系统</a>
             <div class="title item">
                 <b>河海大学</b> 
             </div>
             <div class="right menu">
-	            <a id="github" class="popup icon github item" title="查看本站在Github的项目信息"  data-content="查看本站在Github的项目信息" href="https://github.com/quirkyinc/semantic">
+	            <a id="github" class="popup icon github item" title="查看本站在Github的项目信息"  data-content="查看本站在Github的项目信息" href="https://github.com/JetMuffin/gpa">
 	                <i class="icon github"></i>
 	            </a>
 	            <div class="title item">
@@ -21,11 +45,10 @@
 	            </div>
             </div>
         </div>
-	</div>
+	</div> -->
 	<div class="main-content">
-		<div class="ui two column middle aligned relaxed grid basic segment">
-			<div class="column three wide"></div>
-			<div class="column five wide">
+		<div class="ui column  relaxed basic segment">
+			<div class="column left-side">
 			    <form class="ui form segment" action="consult.php" method="post">
 			        <div class="field">
 			            <label>用户名</label>
@@ -33,7 +56,7 @@
 			                <input placeholder="用户名" type="text" name="stuid">
 		                    <i class="user icon"></i>
 		                    <div class="ui corner label">
-	   	                        <i class="asterisk icon"></i>
+	   	                        <i class="asterisk icon icon-offset"></i>
 			                </div>
 			            </div>
 			        </div>
@@ -43,17 +66,17 @@
 			                <input type="password" placeholder="密码" name="pwd">
 			                <i class="lock icon"></i>
 			                <div class="ui corner label">
-			                    <i class="asterisk icon"></i>
+			                    <i class="asterisk icon icon-offset"></i>
 			                </div>
 			              </div>
 			        </div>
 			        <input class="ui blue submit button center" type="submit" value="立即登录">
 			    </form>
 			</div>
-			<div class="ui vertical divider">
+			<div class="ui vertical divider new-divider">
 			    AND
 			</div>
-			<div class="column two right-side">
+			<div class="column right-side">
 				<h2 class="ui header black">
 				    <i class="circular question icon"></i>
 				    登录须知
