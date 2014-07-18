@@ -1,5 +1,5 @@
-<?php
-class subject
+<?php 
+	class subject
 {
 	 public $title;
 	 public $type;
@@ -9,24 +9,31 @@ class subject
 	 public $score;
 	 public $search_url;
 	 public $rank;
+	 public $gpa;
 	 public $totnum;
 }
 class student
 {
-	private $name;
-	private $college;
-	private $major;
-	private $id;
-	private $credit;
-	private $report = Array();
+	public $name;
+	public $college;
+	public $major;
+	public $id;
+	public $credit;
+	public $report = Array();
 
 	function __construct()
 	{
 		header("Content-type: text/html; charset=utf-8"); 
 		mb_internal_encoding("UTF-8");
-		$this->getData();	
-		$this->calCredit();
-		var_dump($this);
+
+		$args_num = func_num_args(); // 获取参数个数  
+		if($args_num==2){ 
+			$stuid = func_get_arg(0);
+			$pwd = func_get_arg(1);
+			$this->getData($stuid,$pwd);	
+			$this->calCredit();
+		}
+		//var_dump($this);
 	}
 
 	function __destruct()
@@ -34,58 +41,62 @@ class student
 		unset($name, $college,$major,$id);
 	}
 
-	private function getData()
+	private function getData($stuid,$pwd)
 	{
-		$cookie_file = tempnam('./temp','cookie');
 		$login_url  = 'http://jwxt.hhu.edu.cn:7778/pls/wwwbks/bks_login2.login';
-		$post_fields = 'stuid='.$_POST['stuid'].'&pwd='.$_POST['pwd'];
-
-		$ch = curl_init($login_url);
-		curl_setopt($ch, CURLOPT_HEADER, 0);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-		curl_setopt($ch, CURLOPT_POST, 1);
-		curl_setopt($ch, CURLOPT_POSTFIELDS, $post_fields);
-		curl_setopt($ch, CURLOPT_COOKIEJAR, $cookie_file);
-		curl_exec($ch);
-		curl_close($ch);
-
+		$post_fields = 'stuid='.$stuid.'&pwd='.$pwd;
+		$cookie = $this->getConn($login_url,$post_fields);
+		
 		//连接信息资源
-		$info_url='http://jwxt.hhu.edu.cn:7778/pls/wwwbks/bks_login2.loginmessage';
-		$ch = curl_init($info_url);
-		curl_setopt($ch, CURLOPT_HEADER, 0);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-		curl_setopt($ch, CURLOPT_COOKIEFILE, $cookie_file);
-		$info_contents = curl_exec($ch);
+		$info_url = 'http://jwxt.hhu.edu.cn:7778/pls/wwwbks/bks_login2.loginmessage';
+		$info_contents = $this->getConnWithCookie($info_url,$cookie); 
 		if(strlen($info_contents)<500) 
 		{
 			echo "账号或密码错误!";
 			return;
 		}
-		$info_contents = mb_convert_encoding($info_contents, "utf-8", "gb2312");
+		//echo $info_contents;
 		$this->getInfo($info_contents);
 
 		//连接成绩资源
 		$score_url='http://jwxt.hhu.edu.cn:7778/pls/wwwbks/bkscjcx.curscopre';
-		$ch = curl_init($score_url);
-		curl_setopt($ch, CURLOPT_HEADER, 0);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-		curl_setopt($ch, CURLOPT_COOKIEFILE, $cookie_file);
-		$score_contents = curl_exec($ch);
-		$score_contents = mb_convert_encoding($score_contents, "utf-8", "gb2312");
+		$score_contents = $this->getConnWithCookie($score_url,$cookie); 
+		//echo $score_contents;
 		$this->getScore($score_contents);
- 		curl_close($ch);
 
- 		$rank_url = $this->getRankUrl();
- 		//连接排名资源
-		$ch = curl_init($rank_url);
-		curl_setopt($ch, CURLOPT_HEADER, 0);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-		curl_setopt($ch, CURLOPT_COOKIEFILE, $cookie_file);
-		$rank_contents = curl_exec($ch);
-		$rank_contents = mb_convert_encoding($rank_contents, "utf-8", "gb2312");
+		//连接排名资源
+		$rank_url = $this->getRankUrl();
+		$rank_contents = $this->getConnWithCookie($rank_url,$cookie);
 		//echo $rank_contents;
 		$this->getRank($rank_contents);
+	 }
+
+	//建立连接获得cookie
+	private function getConn($url,$post_fields)
+	{
+		$ch = curl_init($url); //初始化
+		curl_setopt($ch,CURLOPT_HEADER,1); //将头文件的信息作为数据流输出
+		curl_setopt($ch,CURLOPT_RETURNTRANSFER,1); //返回获取的输出文本流
+		curl_setopt($ch,CURLOPT_POSTFIELDS,$post_fields); //发送POST数据
+		$content = curl_exec($ch); //执行curl并赋值给$content
+		preg_match('/Set-Cookie:(.*);/iU',$content,$str); //正则匹配
+		$cookie = $str[1]; //获得COOKIE（SESSIONID）
+		curl_close($ch); //关闭curl
+		return $cookie;
+	}
+
+	//建立连接获得信息
+	private function getConnWithCookie($url,$cookie)
+	{
+		$ch = curl_init($url);
+		curl_setopt($ch, CURLOPT_HEADER, 0);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($ch,CURLOPT_COOKIE,$cookie);
+		$contents = curl_exec($ch);
+		$contents = mb_convert_encoding($contents, "utf-8", "gb2312");
+		//echo $contents;
  		curl_close($ch);
+ 		return $contents;
 	}
 
 	private function getInfo($info_contents)
@@ -146,6 +157,20 @@ class student
 			$subject->score = $td[10];
 			$subject->test = $td[13];
 			$subject->type = $td[11];
+			if($subject->type == '任选') {$subject->gpa = null;}
+			else
+			{
+				if($td[10] == '优秀') $subject->gpa = 5.0;
+				elseif ($td[10] == '良好') $subject->gpa = 4.5;
+				elseif ($td[10] == '合格') $subject->gpa = 3.0;
+				elseif($td[10]<65) $subject->gpa = 2.0;
+				elseif($td[10]<70) $subject->gpa = 2.5;
+				elseif($td[10]<75) $subject->gpa = 3.0;
+				elseif($td[10]<80) $subject->gpa = 3.5;
+				elseif($td[10]<85) $subject->gpa = 4.0;
+				elseif($td[10]<90) $subject->gpa = 4.5;
+				else $subject->gpa = 5.0;
+			}
 			array_push($this->report, $subject);
 		}
 	}
@@ -202,14 +227,10 @@ class student
 			$totCredit += $v->credit;
 		}
 		if($totCredit!=0)
-			$this->credit = $totScore/$totCredit;
+			$this->credit = sprintf("%.2f",$totScore/$totCredit);
 		else 
 			$this->credit = 0;
 	//	var_dump($this->credit);
 	}
-
 }
-
-$stu = new student();
-unset($stu);
 ?>

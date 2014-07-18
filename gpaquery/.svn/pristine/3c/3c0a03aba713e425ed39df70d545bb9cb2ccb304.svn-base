@@ -5,6 +5,7 @@
 	$stu = new student();
 	session_start();
 	$stu = unserialize($_SESSION['stu']);
+	// var_dump($stu);
  ?>
  <?php include'header.php' ?>
  <div class="container">

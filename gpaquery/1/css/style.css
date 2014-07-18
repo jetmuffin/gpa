@@ -5,6 +5,9 @@ body{
 a{
 	text-decoration: none;
 }
+p{
+	margin: 0;
+}
 .clear{
 	clear:both;
 }
@@ -137,4 +140,160 @@ a{
 }
 .info .github{
 	font-size: 18px;
+}
+.table-sheet{
+	margin-left: auto !important;
+	margin-right: auto !important;
+}
+.table-sheet{
+	color: #555;
+	font-size: 14px !important;
+	text-align: center;
+	margin-bottom: 20px !important;
+}
+.table-sheet th{
+	text-align: center !important;
+}
+.rank_i{
+	width: 100%;
+	height: 6px;
+	border: 1px solid #e2e2e2;
+	-moz-box-shadow: 1px 1px 3px #e2e2e2 inset;
+	-webkit-box-shadow: 1px 1px 3px #e2e2e2 inset;
+	box-shadow: 1px 1px 3px #e2e2e2 inset;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+}
+.rank_i i{
+	background-color: #06f;
+	float: left;
+	height: 6px;
+	moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+}
+.user-info,.gpa{
+	float: left;
+	font-family: "Microsoft Yahei";
+	color: #333;
+}
+.gpa p{
+	font-size: 33px;
+}
+.user-info{
+	font-size: 14px;
+	line-height: 25px;
+	width:40%;
+	margin-top: 16px !important;
+	margin-right: 30px !important;
+	padding: 14px !important;
+}
+.user-info a{
+	color: #08c;
+	margin-right: 5px;
+	text-decoration: none;
+	font-family: "Microsoft Yahei";
+	font-size:25px;
+}
+.headphoto{
+	font-size: 70px;
+	float: left;
+}
+.credit{
+	float: left;
+	margin-left: 80px;
+	margin-top: -22px;
+}
+.share{
+	float: left;
+	margin-left: 30px;
+	margin-top: 10px;
+}
+.share i{
+	font-size: 25px;
+}
+.share .renren{
+	color: blue;
+}
+.share .weibo{
+	color: red;
+}
+.peakedness-box {
+	padding: 20px;
+	margin-bottom: 10px;
+	clear:both;
+	font-family: "Microsoft Yahei"
+}
+.peakedness {
+	overflow: hidden;
+	zoom: 1;
+}
+.border-r {
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	background: #fff;
+}
+.peakedness-tips-box {
+	overflow: hidden;
+	zoom: 1;
+	padding-bottom: 10px;
+}
+.peakedness .peakedness-tips {
+	border: 1px solid #ccc;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+	width: 720px;
+	margin-left: 10px;
+	text-align: center;
+	font-size: 14px;
+	padding: 10px 0;
+}
+.col-red{
+	color:#F00;
+}
+.peakedness-one, .peakedness-one i {
+	background: url(../images/peakedness-t.png) no-repeat;
+	height: 48px;
+	width: 950px;
+	clear: both;
+	float: right;
+	position: relative;
+}
+.peaked-st {
+	position: absolute;
+	top: 23px;
+	left: 0;
+	width: 950px;
+}
+.peaked-st .st,.st-1{
+	float: left;
+}
+.peaked-st .st-1 {
+	width: 135px;
+}
+.peaked-st .st {
+	width: 123px;
+}
+.peaked-st .st-2{
+	width: 20px;
+	float: right;
+}
+.peakedness-one i {
+	width: 13px;
+	height: 29px;
+	background-position: 0 -151px;
+	position: absolute;
+	left: 0;
+	top: 0px;
+}
+.credit-tag{
+	position: absolute;
+	top: -25px;
+	font-size: 14px;
+	color: #EE0808;
+}
+.table-divider:before,.table-divider:after{
+	width: 37% !important;
 }

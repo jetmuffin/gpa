@@ -179,6 +179,7 @@ p{
 	color: #333;
 }
 .gpa p{
+	margin-left: 94px;
 	font-size: 33px;
 }
 .user-info{
@@ -202,13 +203,10 @@ p{
 }
 .credit{
 	float: left;
-	margin-left: 80px;
-	margin-top: -22px;
 }
 .share{
-	float: left;
-	margin-left: 30px;
-	margin-top: 10px;
+	float: right;
+	margin-top: 30px;
 }
 .share i{
 	font-size: 25px;
@@ -293,7 +291,4 @@ p{
 	top: -25px;
 	font-size: 14px;
 	color: #EE0808;
-}
-.table-divider:before,.table-divider:after{
-	width: 37% !important;
 }

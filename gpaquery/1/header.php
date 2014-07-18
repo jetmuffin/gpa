@@ -6,6 +6,16 @@
 <link rel="stylesheet" type="text/css" href="css/semantic.css">
 <link rel="stylesheet" type="text/css" href="css/style.css">
 <body>
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/semantic.js"></script>
+	<script type="text/javascript" src="js/jquery.tablesort.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('#github').popup();
+			$('#contact').popup();
+			$('.table').tablesort();
+		});
+	</script>
 	<!-- header -->
 	<div class="navbar ">
 		<div class="navbar-inner">
@@ -26,6 +36,8 @@
 				                Design By JetMuffin
 				            </a>
 						</li>
+						<li>|</li>
+						<li><a href="logout.php">退出登录</a></li>
 					</ul>
 					<div class="clear"></div>
 				</div>

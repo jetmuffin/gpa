@@ -5,6 +5,7 @@
 	$stu = new student();
 	session_start();
 	$stu = unserialize($_SESSION['stu']);
+	// var_dump($stu);
  ?>
  <?php include'header.php' ?>
  <div class="container">
@@ -18,14 +19,15 @@
 		</div>
 		 <div class="ui raised segment gpa">
 		 	<div class="ui ribbon  red label ">计算机</div>
-		 	<div class="clear"></div>
-		 	<div class="credit">你的绩点是<p><?=$stu->credit?></p></div>
+		 	你的绩点是
 		 	<div class="share">
-		 		炫耀一下？
-		 		<span>分享到</span>
+		 		分享到
 		 		<a href=""><i class="icon renren"></i></a>
 		 		<a href=""><i class="icon weibo"></i></a>
 		 	</div>
+		 	<div class="credit"><p><?=$stu->credit?></p></div>
+		 		
+
 		 </div>
 	 </div>
 	 <div class="line">
@@ -52,9 +54,6 @@
 		    <div class="clear"></div>
 		</div>
 	 </div>
-	 <div class="ui horizontal divider table-divider">
-  		具体成绩(点击表格表头可以进行排序)
-     </div>
 	 <table class="ui table segment table-sheet sortable">
 	 	<thead>
 	  		<tr>
