@@ -13,7 +13,6 @@
 	{
 		echo '3242';
 		$_SESSION['msg'] = "账号或密码错误，请重新登录！";
-		header("Location: index.php");
 	}
 	else
 	{
@@ -29,7 +28,6 @@
 		unset($share_url_weibo);
 		unset($share_url_renren);
 		unset($share_url_qzone);
-		header("Location: result.php");
 	}
 
 	

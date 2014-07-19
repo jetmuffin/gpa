@@ -4,7 +4,7 @@
 	<div class="main-content">
 		<div class="ui column  relaxed basic segment">
 			<div class="column left-side">
-			    <form class="ui form segment" action="consult.php" method="post">
+			    <form class="ui form segment" action="" method="post">
 			        <div class="field">
 			            <label>用户名</label>
 			            <div class="ui left labeled icon input">
@@ -25,7 +25,7 @@
 			                </div>
 			              </div>
 			        </div>
-			        <input class="ui blue submit button center" type="submit" value="立即登录">
+			        <a class="ui blue submit button center" href="javascript::" id="login-button">立即登录</a>
 			    </form>
 			</div>
 			<div class="ui vertical divider new-divider">
@@ -51,6 +51,9 @@
 					</a>
 				</div>
 			</div>
+	    </div>
+	    <div class="ui dimmer" id="loading">
+	    	<div class="ui text loader">玩命查找中...</div>
 	    </div>
     </div>
 
