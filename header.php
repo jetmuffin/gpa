@@ -33,11 +33,14 @@
 						<li>|</li>
 						<li>
 							 <a id="contact" class="popup item" title="Bug反映，请联系QQ56436642"  data-content="Bug反映，请联系QQ56436642">
-				                Design By JetMuffin
+				                Designed By JetMuffin
 				            </a>
 						</li>
-						<li>|</li>
-						<li><a href="logout.php">退出登录</a></li>
+						
+						<?php 
+							if(isset($_SESSION['stu']))
+								echo '<li>|</li><li><a href="logout.php">退出登录</a></li>';
+						 ?>		
 					</ul>
 					<div class="clear"></div>
 				</div>
