@@ -8,7 +8,7 @@
 			        <div class="field">
 			            <label>用户名</label>
 			            <div class="ui left labeled icon input">
-			                <input placeholder="用户名" type="text" name="stuid">
+			                <input placeholder="用户名" type="text" name="stuid" />
 		                    <i class="user icon"></i>
 		                    <div class="ui corner label">
 	   	                        <i class="asterisk icon icon-offset"></i>
@@ -18,7 +18,7 @@
 			    	<div class="field">
 			            <label>密码</label>
 			            <div class="ui left labeled icon input">
-			                <input type="password" placeholder="密码" name="pwd">
+			                <input type="password" placeholder="密码" name="pwd" />
 			                <i class="lock icon"></i>
 			                <div class="ui corner label">
 			                    <i class="asterisk icon icon-offset"></i>

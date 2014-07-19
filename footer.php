@@ -1,6 +1,7 @@
 <script>
 	$(document).ready(function(){
-		$('#login-button').click(function(){
+		function login()
+		{
 			$("#loading").addClass("active");
 			var stuid = $("input[name='stuid']").val();
 			var pwd = $("input[name='pwd']").val();
@@ -19,7 +20,14 @@
 			        location.href = "result.php";
 				} 
 			});
+		}
+		$('#login-button').click(function(){
+			login();
 		});
+		$("input").keyup(function(event){ 
+          	if(event.keyCode == 13) 
+            	login(); 
+        });
 	});
 
 </script>
