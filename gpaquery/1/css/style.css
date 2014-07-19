@@ -154,6 +154,12 @@ p{
 .table-sheet th{
 	text-align: center !important;
 }
+.table-green{
+	color: #119000!important;
+}
+.table-red{
+	color: #CD2929!important;
+}
 .rank_i{
 	width: 100%;
 	height: 6px;
@@ -205,22 +211,53 @@ p{
 	margin-left: 80px;
 	margin-top: -22px;
 }
+.more{
+	float: left;
+	margin-right: 30px;
+}
 .share{
 	float: left;
 	margin-left: 30px;
 	margin-top: 10px;
 }
-.share i{
-	font-size: 25px;
+.share span{
+	margin-right: 10px;
+	float: left;
 }
-.share .renren{
-	color: blue;
+.share .share-button{
+	background-image: url(../images/share.png);
+	font-size: 12px;
+	color: #999;
+	margin: 0 5px 0 0;
+	line-height: 20px;
+	cursor: pointer;
+	display: block;
+	padding-left: 0;
+	width: 20px;
+	height: 20px;
+	display: -moz-inline-stack;
+	display: inline-block;
+	vertical-align: middle;
+	zoom: 1;
 }
-.share .weibo{
-	color: red;
+.share-button:hover{
+	opacity: .8;
+}
+.share-weibo{
+	background-position: -72px;
+}
+.share-weichat{
+	background-position: -24px !important;
+}
+.share-qzone{
+	background-position: -48px;
+}
+.tags{
+	margin-top: -20px;
+	margin-left: 30px;
 }
 .peakedness-box {
-	padding: 20px;
+	padding: 20px 20px 30px 20px;
 	margin-bottom: 10px;
 	clear:both;
 	font-family: "Microsoft Yahei"
@@ -297,3 +334,4 @@ p{
 .table-divider:before,.table-divider:after{
 	width: 37% !important;
 }
+

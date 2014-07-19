@@ -242,5 +242,6 @@ class student
 			$this->credit = 0;
 	//	var_dump($this->credit);
 	}
+
 }
 ?>

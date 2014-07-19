@@ -213,7 +213,6 @@ p{
 }
 .more{
 	float: left;
-	margin-right: 30px;
 }
 .share{
 	float: left;
@@ -222,9 +221,8 @@ p{
 }
 .share span{
 	margin-right: 10px;
-	float: left;
 }
-.share .share-button{
+.share-button{
 	background-image: url(../images/share.png);
 	font-size: 12px;
 	color: #999;
@@ -244,10 +242,10 @@ p{
 	opacity: .8;
 }
 .share-weibo{
-	background-position: -72px;
+	background-position: 20px;
 }
 .share-weichat{
-	background-position: -24px !important;
+	background-position: -24px;
 }
 .share-qzone{
 	background-position: -48px;
@@ -334,4 +332,3 @@ p{
 .table-divider:before,.table-divider:after{
 	width: 37% !important;
 }
-

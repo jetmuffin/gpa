@@ -1,10 +1,9 @@
 <?php 
 	include 'student.php';
+	
 	header("Content-type: text/html; charset=utf-8"); 
 	$stu = new student();
 	session_start();
-	if(!isset($_SESSION['stu']))
-		header('Location:index.php');
 	$stu = unserialize($_SESSION['stu']);
 	$stu_tags = unserialize($_SESSION['stu_tags']);
 	$share_url_weibo = unserialize($_SESSION['share_url_weibo']);

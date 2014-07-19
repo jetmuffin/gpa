@@ -1,15 +1,11 @@
 <?php 
 	include 'student.php';
+	
 	header("Content-type: text/html; charset=utf-8"); 
 	$stu = new student();
 	session_start();
-	if(!isset($_SESSION['stu']))
-		header('Location:index.php');
 	$stu = unserialize($_SESSION['stu']);
 	$stu_tags = unserialize($_SESSION['stu_tags']);
-	$share_url_weibo = unserialize($_SESSION['share_url_weibo']);
-	$share_url_renren = unserialize($_SESSION['share_url_renren']);
-	$share_url_qzone = unserialize($_SESSION['share_url_qzone']);
  ?>
  <?php include'header.php' ?>
  <div class="container">
@@ -34,13 +30,14 @@
 			 		// var_dump($stu_tags);
 			 		 ?>
 			 	</div>
-			 	<div class="share bdsharebuttonbox">
-			 		
-			 		<span>炫耀一下？分享到</span>
-			 		<a href="<?=$share_url_renren?>"  target="_blank" class="share-renren share-button" title="分享到人人"></a>
-			 		<a href="<?=$share_url_weibo?>"  target="_blank" class="share-weibo share-button" title="分享到新浪微博"></a>
-			 		<a href="<?=$share_url_qzone?>" class="share-qzone share-button"  target="_blank" title="分享到QQ空间"></a>
-					<a href="#" class="bds_weixin share-weichat share-button" data-cmd="weixin" title="分享到微信"></a>
+			 	<div class="share">
+			 		炫耀一下？
+			 		<span>分享到</span>
+			 		<a href="" class="share-renren share-button" title="分享到人人"></a>
+			 		<a href="" class="share-weibo share-button" title="分享到新浪微博"></a>
+			 		<a href="" class="share-weichat share-button" title="分享到微信"></a>
+			 		<a href="" class="share-qzone share-button" title="分享到QQ空间"></a>
+			 			<wb:share-button appkey="5gBsE5" addition="simple" type="button"></wb:share-button>
 			 	</div>
 		 	</div>
 		 </div>
