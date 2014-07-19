@@ -48,6 +48,17 @@ p{
 .icon-offset{
 	margin-left: 15px !important;
 }
+.logo{
+	float: left;
+	margin-top: 7px;
+	margin-right: 5px;
+}
+.message{
+	width: 30%;
+	position: absolute !important;
+	margin-top: 50px !important;
+	left: 30%;
+}
 .navbar {
 	color: #999;
 	overflow: visible;
@@ -333,5 +344,8 @@ p{
 }
 .table-divider:before,.table-divider:after{
 	width: 37% !important;
+}
+#contact{
+	cursor: pointer;
 }
 

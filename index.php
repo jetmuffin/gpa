@@ -1,4 +1,5 @@
 <?php include 'header.php'; ?>
+<?php session_start();if(isset($_SESSION['msg'])) echo '<div class="ui red message">'.$_SESSION['msg'].'</div>';?>
 	<!-- main-content -->
 	<div class="main-content">
 		<div class="ui column  relaxed basic segment">
@@ -52,4 +53,5 @@
 			</div>
 	    </div>
     </div>
+
 <?php include 'footer.php'; ?>
