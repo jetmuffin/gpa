@@ -52,7 +52,6 @@ class student
 		$info_contents = $this->getConnWithCookie($info_url,$cookie); 
 		if(strlen($info_contents)<500) 
 		{
-			echo "账号或密码错误!";
 			return;
 		}
 		//echo $info_contents;
