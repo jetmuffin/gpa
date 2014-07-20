@@ -1,0 +1,207 @@
+
+/************************************************************************************
+smaller than 560
+*************************************************************************************/
+/*@media screen and (max-width: 560px) {
+	.container{
+		width: 80%;
+	}
+	.navbar{
+		width: 100%;
+	}
+	.info{
+		float: none;
+		position: absolute;
+		right: 0;
+		margin-top: 45px;
+	}
+	.main-content{
+		margin-top: 50px;
+	}
+	.left-side{
+		clear: both;
+		width: 85%;
+		display: block;
+	}
+	.right-side{
+		width: 85%;	
+	}
+	.login-notice{
+		width: auto;
+	}
+	.new-divider{
+		display: none;
+	}
+	.media-divider{
+		display: block;
+		clear: both;
+		margin-top: 10px !important;
+		top: 10px !important;
+		width: 71%;
+	}
+	.user-info{
+		width: 100%;
+		margin-top: 45px !important;
+		float: none;
+	}
+	.gpa{
+		margin-top: 0 !important;
+	}
+	.share .share-button,.share,.more,.gpa,.credit{
+		float: none;
+	}
+	.credit ,.credit p{
+		margin-left: 0;
+	}
+	.more,.credit{
+		text-align: center;
+	}
+	.tags{
+		margin-top: 0;
+	}
+	.gpa p{
+		font-size: 53px;
+	}
+	.peakedness-box{
+		margin-top: 13px;
+	}
+	.table-divider:before, .table-divider:after {
+		width: 13% !important;
+	}
+	.peakedness-line{
+		width: 100%;
+		overflow: hidden;
+		height: 40px;
+	}
+	.peakedness-tips-box{
+		text-align: center;
+	}
+	.peakedness-tips{
+		width: 90%;
+	}
+	.subject-type,.subject-test{
+		display: none !important;
+	}
+	.ui.table tr{
+		display: table-row !important;
+	}
+}*/
+/************************************************************************************
+smaller than 380
+*************************************************************************************/
+@media screen and (max-width:980px) {
+	.container{
+		width: 80%;
+	}
+	.school{
+		display: none;
+	}
+	.user-info span{
+		display: block;
+	}
+	.navbar .divider-vertical{
+		display: none;
+	}
+	.navbar{
+		width: 100%;
+	}
+	.headphoto{
+		font-size:50px;
+	}
+	.info{
+		float: none;
+		position: absolute;
+		right: 0;
+		margin-top: 45px;
+	}
+	.main-content{
+		margin-top: 50px;
+	}
+	.message {
+		width: 60%;
+		position: relative !important;
+		margin-top: 50px !important;
+		left: 20%;
+		}
+	.left-side{
+		clear: both;
+		width: 90%;
+		display: block;
+	}
+	.right-side{
+		width: 85%;	
+	}
+	.login-notice{
+		width: auto;
+	}
+	.new-divider{
+		display: none;
+	}
+	.media-divider{
+		display: block;
+		clear: both;
+		margin-top: 10px !important;
+		top: 10px !important;
+		width: 71%;
+	}
+	.user-info{
+		width: 100%;
+		margin-top: 45px !important;
+		float: none;
+	}
+	.gpa{
+		margin-top: 0 !important;
+	}
+	.share .share-button,.share,.more,.gpa,.credit{
+		float: none;
+	}
+	.peakedness-tips{
+		width: 90% !important;
+	}
+	.table-divider{
+		display: none;
+	}
+	.credit ,.credit p{
+		margin-left: 0;
+	}
+	.share span{
+		display: block;
+		float: none;
+	}
+	.more,.credit{
+		text-align: center;
+	}
+	.more{
+		margin-right: 0;
+	}
+	.tags{
+		margin-top: 0;
+		margin-left: 0;
+	}
+	.gpa p{
+		font-size: 53px;
+	}
+	.peakedness-box{
+		margin-top: 13px;
+	}
+	.table-divider:before, .table-divider:after {
+		width: 13% !important;
+	}
+	.peakedness-line{
+		width: 100%;
+		overflow: hidden;
+		height: 40px;
+	}
+	.peakedness-tips-box{
+		text-align: center;
+	}
+	.peakedness-tips{
+		width: 90%;
+	}
+	.subject-type,.subject-test{
+		display: none !important;
+	}
+	.ui.table tr{
+		display: table-row !important;
+	}
+}

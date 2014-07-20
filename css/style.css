@@ -35,6 +35,9 @@ p{
 	float: left;
 	left: 34%!important;
 }
+.media-divider{
+	display: none;
+}
 .left-side,.right-side{
 	float: left;
 }
@@ -325,7 +328,7 @@ p{
 	width: 123px;
 }
 .peaked-st .st-2{
-	width: 20px;
+	width: 24px;
 	float: right;
 }
 .peakedness-one i {

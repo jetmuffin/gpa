@@ -4,6 +4,8 @@
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 <meta content="GPA计算、河海大学成绩查询、成绩查询" name="keywords">
 <meta content="提供代理借口，供河海大学学生查询成绩并计算GPA" name="description">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="apple-mobile-web-app-capable" content="yes" />
 <link rel="stylesheet" type="text/css" href="css/semantic.css">
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/semantic.js"></script>
@@ -30,6 +32,7 @@ with(document) 0[(getElementsByTagName('head')[0] || body).appendChild(createEle
 	});
 </script>
 <link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="css/media-query.css">
 </head>
 <body>
 

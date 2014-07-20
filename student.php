@@ -167,11 +167,14 @@ class student
 			$subject->test = $td[13];
 			$subject->type = $td[11];
 			if($subject->type == '任选') {$subject->gpa = null;}
+			else if($td[10] == null) {$subject->gpa = '无（成绩未出）';}
 			else
 			{
 				if($td[10] == '优秀') $subject->gpa = 5.0;
 				elseif ($td[10] == '良好') $subject->gpa = 4.5;
+				elseif ($td[10] == '中等') $subject->gpa = 3.5;
 				elseif ($td[10] == '合格') $subject->gpa = 3.0;
+				elseif ($td[10] == '不合格') $subject->gpa = 2.0;
 				elseif($td[10]<65) $subject->gpa = 2.0;
 				elseif($td[10]<70) $subject->gpa = 2.5;
 				elseif($td[10]<75) $subject->gpa = 3.0;
@@ -216,11 +219,14 @@ class student
 		foreach ($this->report as $k=>$v)
 		{
 			if($v->type == '任选') {continue;}
+			else if($v->score == null) {continue;}
 			else
 			{
 				if($v->score == '优秀') $credit = 5.0;
 				elseif ($v->score == '良好') $credit = 4.5;
-				elseif ($v->score == '合格') $credit = 3.0;
+				elseif ($v->score == '中等') $credit = 3.5;
+                elseif ($v->score == '合格') $credit = 3.0;
+                elseif ($v->score == '不合格') $credit = 2.0;
 				elseif($v->score<65) $credit = 2.0;
 				elseif($v->score<70) $credit = 2.5;
 				elseif($v->score<75) $credit = 3.0;

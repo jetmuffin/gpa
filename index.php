@@ -31,6 +31,9 @@
 			<div class="ui vertical divider new-divider">
 			    AND
 			</div>
+			<div class="ui horizontal divider media-divider">
+            	AND
+        	</div>
 			<div class="column right-side">
 				<h2 class="ui header black">
 				    <i class="circular question icon"></i>
